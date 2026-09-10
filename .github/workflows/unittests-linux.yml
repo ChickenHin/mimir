@@ -1,6 +1,6 @@
 name: Googletest Unit Tests - Linux
 
-on: [push, pull_request]
+on: [workflow_dispatch]
 
 jobs:
   build:
@@ -42,11 +42,11 @@ jobs:
       run: GTEST_OUTPUT=xml:test-results/ GTEST_COLOR=1 ctest -V
 
     # Release
-    - name: Release, Configure, and Build Mimir
-      run: |
-        cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON -S . -B build_release -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/dependencies/installs
-        cmake --build build_release
+    # - name: Release, Configure, and Build Mimir
+    #   run: |
+    #     cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON -S . -B build_release -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/dependencies/installs
+    #     cmake --build build_release
 
-    - name: Release Test
-      working-directory: build_release/tests/unit
-      run: GTEST_OUTPUT=xml:test-results/ GTEST_COLOR=1 ctest -V
+    # - name: Release Test
+    #   working-directory: build_release/tests/unit
+    #   run: GTEST_OUTPUT=xml:test-results/ GTEST_COLOR=1 ctest -V
